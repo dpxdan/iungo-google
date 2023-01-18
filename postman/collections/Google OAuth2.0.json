@@ -1,0 +1,288 @@
+{
+	"info": {
+		"_postman_id": "f35e1f88-b41e-4837-93df-665af0ea09cc",
+		"name": "Google OAuth2.0",
+		"description": "#### This collection aims to walk through how to set up OAuth2.0 authentication to use Google API. \n\n1. Go to Google Cloud Platform and sign into your Google account https://console.cloud.google.com/\n\n2. Select a new Project or select one if you already have.\n\n3. Go to \"APIs & Services\" and then to \"Credentials\" > \"Create OAuth Client ID\"\n\n4. Select \"Web application\" for Application type and enter either `https://oauth.pstmn.io/v1/browser-callback` and `https://oauth.pstmn.io/v1/callback` for Authorised redirect URIs. This ensures the auth flow works for Postman on both desktop and web. Once you hit \"Create\" you will see \"Client ID\" and \"Client Secret\" - those two values are important (do NOT share with anyone) and we will need them later in Postman.\n\n5. Next go to \"OAuth consent screen\" and enter `oauth.pstmn.io` for \"Authorised domains\n\". For Scope, select one that you want to use. For example, we need to add one of scopes listed here (https://developers.google.com/drive/api/v3/reference/files/list#auth) if we want to get files in Google Drive (https://developers.google.com/drive/api/v3/reference/files/list#http-request).\n\n6. In Test users, make sure to add your account email ID so that you can test the app using your Google account.\n\n7. At last, go to Library tab and select API that you want to use. For this example, I am using Google Drive API. Click on Enable. \nThat's everything you need in Google. Let's move to Postman!\n\n8. Now go to Variables tab in this collection and paste your client Id and secret. Also enter appropriate scope. \n\n9. In Authorization tab of collection, just hit \"Get New Access Token\". That will open up a web browser window asking for your authentication.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "15570859-f35e1f88-b41e-4837-93df-665af0ea09cc"
+	},
+	"item": [
+		{
+			"name": "Get People Connections",
+			"id": "10a8bbbd-9806-4b9d-b29a-a36331b69e48",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {},
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://people.googleapis.com/v1/people/me/connections?pageSize=100&personFields=addresses%2CageRanges%2Cbiographies%2Cbirthdays%2CcalendarUrls%2CclientData%2CcoverPhotos%2CemailAddresses%2Cevents%2CexternalIds%2Cgenders%2CimClients%2Cinterests%2Clocales%2Clocations%2Cmemberships%2Cmetadata%2CmiscKeywords%2Cnames%2Cnicknames%2Coccupations%2Corganizations%2CphoneNumbers%2Cphotos%2Crelations%2CsipAddresses%2Cskills%2Curls%2CuserDefined&sources=READ_SOURCE_TYPE_CONTACT&key=AIzaSyBfv2f9zNGxsD5adLChkCwmV5JVbTfsziA",
+					"protocol": "https",
+					"host": [
+						"people",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"v1",
+						"people",
+						"me",
+						"connections"
+					],
+					"query": [
+						{
+							"key": "pageSize",
+							"value": "100"
+						},
+						{
+							"key": "personFields",
+							"value": "addresses%2CageRanges%2Cbiographies%2Cbirthdays%2CcalendarUrls%2CclientData%2CcoverPhotos%2CemailAddresses%2Cevents%2CexternalIds%2Cgenders%2CimClients%2Cinterests%2Clocales%2Clocations%2Cmemberships%2Cmetadata%2CmiscKeywords%2Cnames%2Cnicknames%2Coccupations%2Corganizations%2CphoneNumbers%2Cphotos%2Crelations%2CsipAddresses%2Cskills%2Curls%2CuserDefined"
+						},
+						{
+							"key": "sources",
+							"value": "READ_SOURCE_TYPE_PROFILE",
+							"disabled": true
+						},
+						{
+							"key": "sources",
+							"value": "READ_SOURCE_TYPE_CONTACT"
+						},
+						{
+							"key": "sources",
+							"value": "READ_SOURCE_TYPE_DOMAIN_CONTACT",
+							"disabled": true
+						},
+						{
+							"key": "key",
+							"value": "AIzaSyBfv2f9zNGxsD5adLChkCwmV5JVbTfsziA"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get  files in Google Drive Copy",
+			"id": "a95e6059-f96a-43c3-b7c4-14aa8de32a3e",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {},
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://people.googleapis.com/v1/people/me/connections?pageSize=100&personFields=addresses%2CageRanges%2Cbiographies%2Cbirthdays%2CcalendarUrls%2CclientData%2CcoverPhotos%2CemailAddresses%2Cevents%2CexternalIds%2Cgenders%2CimClients%2Cinterests%2Clocales%2Clocations%2Cmemberships%2Cmetadata%2CmiscKeywords%2Cnames%2Cnicknames%2Coccupations%2Corganizations%2CphoneNumbers%2Cphotos%2Crelations%2CsipAddresses%2Cskills%2Curls%2CuserDefined&sources=READ_SOURCE_TYPE_PROFILE&sources=READ_SOURCE_TYPE_CONTACT&sources=READ_SOURCE_TYPE_DOMAIN_CONTACT&key=AIzaSyBfv2f9zNGxsD5adLChkCwmV5JVbTfsziA",
+					"protocol": "https",
+					"host": [
+						"people",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"v1",
+						"people",
+						"me",
+						"connections"
+					],
+					"query": [
+						{
+							"key": "pageSize",
+							"value": "100"
+						},
+						{
+							"key": "personFields",
+							"value": "addresses%2CageRanges%2Cbiographies%2Cbirthdays%2CcalendarUrls%2CclientData%2CcoverPhotos%2CemailAddresses%2Cevents%2CexternalIds%2Cgenders%2CimClients%2Cinterests%2Clocales%2Clocations%2Cmemberships%2Cmetadata%2CmiscKeywords%2Cnames%2Cnicknames%2Coccupations%2Corganizations%2CphoneNumbers%2Cphotos%2Crelations%2CsipAddresses%2Cskills%2Curls%2CuserDefined"
+						},
+						{
+							"key": "sources",
+							"value": "READ_SOURCE_TYPE_PROFILE"
+						},
+						{
+							"key": "sources",
+							"value": "READ_SOURCE_TYPE_CONTACT"
+						},
+						{
+							"key": "sources",
+							"value": "READ_SOURCE_TYPE_DOMAIN_CONTACT"
+						},
+						{
+							"key": "key",
+							"value": "AIzaSyBfv2f9zNGxsD5adLChkCwmV5JVbTfsziA"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin Directory",
+			"id": "f599e2b4-cd12-4f40-a3ac-f78c33756ca0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://admin.googleapis.com/admin/directory/v1/users/cloud-directory-sync%40gcloud.iungo.cloud?projection=full&viewType=admin_view&prettyPrint=true&key=AIzaSyBfv2f9zNGxsD5adLChkCwmV5JVbTfsziA",
+					"protocol": "https",
+					"host": [
+						"admin",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"admin",
+						"directory",
+						"v1",
+						"users",
+						"cloud-directory-sync%40gcloud.iungo.cloud"
+					],
+					"query": [
+						{
+							"key": "projection",
+							"value": "full"
+						},
+						{
+							"key": "viewType",
+							"value": "admin_view"
+						},
+						{
+							"key": "prettyPrint",
+							"value": "true"
+						},
+						{
+							"key": "key",
+							"value": "AIzaSyBfv2f9zNGxsD5adLChkCwmV5JVbTfsziA"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "tokenType",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "accessToken",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "resource",
+				"value": {
+					"aace2105-627c-4bf0-8e81-10c66d8117e8": "people/me"
+				},
+				"type": "any"
+			},
+			{
+				"key": "scope",
+				"value": "{{scope}}",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "google token",
+				"type": "string"
+			},
+			{
+				"key": "challengeAlgorithm",
+				"value": "S256",
+				"type": "string"
+			},
+			{
+				"key": "useBrowser",
+				"value": true,
+				"type": "boolean"
+			},
+			{
+				"key": "grant_type",
+				"value": "authorization_code",
+				"type": "string"
+			},
+			{
+				"key": "clientSecret",
+				"value": "{{clientSecret}}",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{clientId}}",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "https://accounts.google.com/o/oauth2/auth",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "client_authentication",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "https://oauth2.googleapis.com/token",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "bedb5c48-1b67-4a5b-aa61-2bce3ba28e11"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "69648354-fb6c-423c-91da-bbb426bd7e1c"
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "41e79be6-68e1-44da-98d9-a5d005f96b3f",
+			"key": "clientId",
+			"value": "{{clientId}}"
+		},
+		{
+			"id": "7ff8c52e-61bd-4c45-b388-05e18c569b63",
+			"key": "clientSecret",
+			"value": "{{clientSecret}}"
+		},
+		{
+			"id": "5a311dc6-9172-402b-a5bd-9ca8be1e348d",
+			"key": "scope",
+			"value": "{{scope}}"
+		}
+	]
+}
